@@ -79,7 +79,7 @@ def refresh_task_quotas(task: Task, state: State) -> None:
     available_capacity = task.max_allowed_invocatons
     remaining_clients_count = total_clients_count
 
-    # First, we check the demand from each client. If the demand is low enough that it can be honoured for all clients,
+    # First, we check the demand from each client. If the lowest demand is small enough that it can be honoured for all clients,
     # it is allocated for all clients.
     while (len(client_wise_invocation_list) > 0 and 
            client_wise_invocation_list[0][0]*remaining_clients_count < available_capacity):
