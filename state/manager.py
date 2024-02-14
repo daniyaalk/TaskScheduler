@@ -86,7 +86,7 @@ def refresh_task_quotas(task: Task, state: State) -> None:
         
         for client in client_wise_usage:
 
-            if client in new_allocations and new_allocations[client] == client_wise_usage[client]:
+            if client in new_allocations and new_allocations[client] >= client_wise_usage[client]:
                 # Skip increment if this client already has required allocation
                 continue
 
@@ -103,7 +103,7 @@ def refresh_task_quotas(task: Task, state: State) -> None:
         # capacity can be allocated equally to all remaining clients with unfulfilled demands.
         remaining_capacity_per_client = available_capacity // remaining_clients_count
         for client in client_wise_usage:
-            if client in new_allocations and new_allocations[client] == client_wise_usage[client]:
+            if client in new_allocations and new_allocations[client] >= client_wise_usage[client]:
                 # Demand already fulfilled, continue to next client
                 continue
             
